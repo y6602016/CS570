@@ -181,12 +181,13 @@ public class BinaryNumber {
 	public static void main(String[] args) {
 		try {
 			BinaryNumber test = new BinaryNumber("00101");
-//			test.shiftR(5);
 			System.out.println(test.toDecimal());
 			System.out.println(test.toString());
 			BinaryNumber test2 = new BinaryNumber("11001");
 			test.add(test2);
 			System.out.println(test.toDecimal());
+			System.out.println(test.toString());
+			test.shiftR(5);
 			System.out.println(test.toString());
 		} catch (Exception excp) {
 			System.out.print(excp.getMessage());
