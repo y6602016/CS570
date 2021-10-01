@@ -180,15 +180,17 @@ public class BinaryNumber {
 	
 	public static void main(String[] args) {
 		try {
-			BinaryNumber test = new BinaryNumber("00101");
+			BinaryNumber test = new BinaryNumber("1111111111111111111111111111111");
 			System.out.println(test.toDecimal());
 			System.out.println(test.toString());
-			BinaryNumber test2 = new BinaryNumber("11001");
-			test.add(test2);
-			System.out.println(test.toDecimal());
-			System.out.println(test.toString());
-			test.shiftR(5);
-			System.out.println(test.toString());
+			System.out.println(Integer.MAX_VALUE);
+//			BinaryNumber test2 = new BinaryNumber("11001");
+//			test.add(test2);
+//			System.out.println(test.toDecimal());
+//			System.out.println(test.toString());
+//			test.shiftR(32);
+//			System.out.println(test.toString());
+//			System.out.println(test.toDecimal());
 		} catch (Exception excp) {
 			System.out.print(excp.getMessage());
 		} catch (OutOfMemoryError excp) {
