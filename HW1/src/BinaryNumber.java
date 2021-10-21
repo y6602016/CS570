@@ -2,7 +2,7 @@
 import java.util.Arrays;
 
 public class BinaryNumber {
-	private int data[];
+	private int[] data;
 	private boolean overflow;
 	
 	// constructor with int parameter

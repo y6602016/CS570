@@ -1,4 +1,4 @@
-// HW2, CWID: 10675677, Name: Qi-Rui Hong
+// HW2, CWID: 10475677, Name: Qi-Rui Hong
 
 public class Complexity {
 	// complexity O(n^2)
@@ -96,7 +96,7 @@ public class Complexity {
 	}
 	
 	public static void main(String[] args) {
-		method5(8);
+		method6(4);
 	}
 	
 }
