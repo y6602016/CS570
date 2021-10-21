@@ -1,3 +1,5 @@
+// HW3, CWID: 10675677, Name: Qi-Rui Hong
+
 import java.util.*;
 
 public class IDLList<E> {
@@ -7,12 +9,13 @@ public class IDLList<E> {
 		Node<E> next;
 		Node<E> prev;
 		
-		public Node(E elem) {
+		public Node(E elem) throws Exception {
 			this.data = elem;
 			this.next = null;
 			this.prev = null;
+			
 		}
-		public Node(E elem, Node<E> prev, Node<E> next) {
+		public Node(E elem, Node<E> prev, Node<E> next) throws Exception {
 			this.data = elem;
 			this.next = next;
 			this.prev = prev;
@@ -25,7 +28,7 @@ public class IDLList<E> {
 	private ArrayList<Node<E>> indices;
 	
 	// constructor to create an empty list
-	public IDLList() {
+	public IDLList() throws Exception {
 		this.head = null;
 		this.tail = null;
 		this.size = 0;
@@ -60,8 +63,8 @@ public class IDLList<E> {
 	
 	// add the node at the head of the list
 	public boolean add (E elem) {
-		Node<E> node = new Node<E>(elem);
 		try {
+			Node<E> node = new Node<E>(elem);
 			// if the list is empty, both head and tail point to the node
 			if (this.size == 0) {
 				this.head = node;
@@ -85,8 +88,8 @@ public class IDLList<E> {
 	
 	// add the node at the tail of the list
 	public boolean append (E elem) {
-		Node<E> node = new Node<E>(elem);
 		try {
+			Node<E> node = new Node<E>(elem);
 			// if the list is empty, both head and tail point to the node
 			if (this.size == 0) {
 				this.head = node;
@@ -106,6 +109,7 @@ public class IDLList<E> {
 		catch (Exception excp) {
 			return false;
 		}
+		
 	}
 	
 	// convert the list to string format
@@ -249,36 +253,5 @@ public class IDLList<E> {
 			return false;
 		}
 		
-	}
-	
-	public static void main(String[] args) {
-		IDLList<Integer> list_a = new IDLList<Integer>();
-		list_a.append(5);
-		System.out.println(list_a.toString());
-		list_a.append(9);
-		System.out.println(list_a.toString());
-		list_a.add(2);
-		System.out.println(list_a.toString());
-		list_a.append(8);
-		System.out.println(list_a.toString());
-		list_a.add(2, 32);
-		System.out.println(list_a.toString());
-		list_a.append(32);
-		System.out.println(list_a.toString());
-		
-//		System.out.println(list_a.size());
-//		System.out.println(list_a.get(2));
-//		System.out.println(list_a.getHead());
-//		System.out.println(list_a.getLast());
-		
-//		System.out.println(list_a.removeLast());
-//		System.out.println(list_a.toString());
-//		System.out.println(list_a.remove());
-//		System.out.println(list_a.toString());
-		
-		System.out.println(list_a.remove(32));
-		System.out.println(list_a.toString());
-		System.out.println(list_a.remove(32));
-		System.out.println(list_a.toString());
 	}
 }
