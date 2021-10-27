@@ -26,16 +26,14 @@ public class IDLListTest {
 			
 			System.out.println(list_a.removeLast());
 			System.out.println(list_a.toString());
-			System.out.println(list_a.remove());
+			System.out.println(list_a.removeAt(1));
 			System.out.println(list_a.toString());
 			
 			System.out.println(list_a.remove(32));
 			System.out.println(list_a.toString());
 			System.out.println(list_a.remove(32));
 			System.out.println(list_a.toString());
-		}
-		catch (NumberFormatException e) {
-            System.out.println("You must enter an number! " + e);
+			
 		}
 		catch (Exception excp) {
 			System.out.print(excp.getMessage());
