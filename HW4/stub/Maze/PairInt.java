@@ -5,7 +5,7 @@ public class PairInt {
 	private int y;
 	
 	// constructor
-	public PairInt(int x, int y) {
+	public PairInt(int x, int y) throws Exception {
 		this.x = x;
 		this.y = y;
 	}
@@ -22,11 +22,17 @@ public class PairInt {
 	
 	// set x value
 	public void setX(int x) {
+		if ( x < 0) {
+			return;
+		}
 		this.x = x;
 	}
 	
 	// set y value
 	public void setY(int y) {
+		if ( y < 0) {
+			return;
+		}
 		this.y= y; 
 	}
 	
@@ -41,7 +47,13 @@ public class PairInt {
 	}
 	
 	// return new copy object with same x and y
-	public PairInt copy() {
-		return new PairInt(this.x, this.y);
+	public PairInt copy( ) {
+		try {
+			PairInt copy_pair = new PairInt(this.x, this.y);
+			return copy_pair;
+		}
+		catch (Exception excp) {
+			return null;
+		}
 	}
 }

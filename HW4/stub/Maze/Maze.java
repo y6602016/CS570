@@ -17,14 +17,13 @@ public class Maze implements GridColors {
     /** Wrapper method. */
     public boolean findMazePath() {	
     	// test findMazePathMin
-    	ArrayList<PairInt> result =  findMazePathMin(0, 0);
-    	return result.size() > 0;
-    	
-    	// test findAllMazePaths
-//    	ArrayList <ArrayList<PairInt>> result = findAllMazePaths(0, 0);
+//    	ArrayList<PairInt> result =  findMazePathMin(0, 0);
 //    	return result.size() > 0;
     	
- 	
+    	// test findAllMazePaths
+    	ArrayList <ArrayList<PairInt>> result = findAllMazePaths(0, 0);
+    	return result.size() > 0;
+    	
 //        return findMazePath(0, 0); // (0, 0) is the start point.
     }
 
@@ -118,8 +117,13 @@ public class Maze implements GridColors {
     	// set color to PATH
     	maze.recolor(x, y, PATH);
     	
+    	PairInt pair;
     	// create PairInt object with x and y
-    	PairInt pair = new PairInt(x, y);
+    	try {
+    		pair = new PairInt(x, y);
+    	}catch (Exception excp) {
+			return;
+		}
     	
     	// push the object to trace
     	trace.push(pair);
