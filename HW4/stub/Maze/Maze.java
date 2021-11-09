@@ -16,15 +16,18 @@ public class Maze implements GridColors {
 
     /** Wrapper method. */
     public boolean findMazePath() {	
-    	// test findMazePathMin
-//    	ArrayList<PairInt> result =  findMazePathMin(0, 0);
-//    	return result.size() > 0;
-    	
     	// test findAllMazePaths
-    	ArrayList <ArrayList<PairInt>> result = findAllMazePaths(0, 0);
-    	return result.size() > 0;
+    	System.out.println("All Paths:");
+    	findAllMazePaths(0, 0);
+
+    	System.out.println("");
+    	System.out.println("The shortest path is");
+    	// test findMazePathMin
+    	findMazePathMin(0, 0);
     	
-//        return findMazePath(0, 0); // (0, 0) is the start point.
+
+    	
+        return findMazePath(0, 0); // (0, 0) is the start point.
     }
 
     /**
