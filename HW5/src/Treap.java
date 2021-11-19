@@ -87,25 +87,25 @@ public class Treap<E extends Comparable <E>> {
 		priorityGenerator = new Random(seed);
 	}
 	
-	public boolean add(E data) {
+	public boolean add(E key) {
 		// randomGenerator generate a random integer
 		int priority = this.priorityGenerator.nextInt();
 		// call add helper function, if it returns true, return true
-		if (this.add(data, priority)) {
+		if (this.add(key, priority)) {
 			return true;
 		}
 		// otherwise, return false
 		else {return false;}
 	}
 
-	public boolean add(E data, int priority) {
+	public boolean add(E key, int priority) {
 		// if the key already in the Treap, return false
-		if (this.find(data)) {
+		if (this.find(key)) {
 			return false;
 		}
 		try {
 			// create a new node
-			Node<E> node = new Node<E>(data, priority);
+			Node<E> node = new Node<E>(key, priority);
 		
 			// if the Treap is empty, just add it
 			if (this.root == null) {
@@ -123,7 +123,7 @@ public class Treap<E extends Comparable <E>> {
 				
 				// compare curr's key and new key
 				// node.data < curr.data
-				if (curr.data.compareTo(data) > 0) {
+				if (curr.data.compareTo(key) > 0) {
 					// if curr has no left child, put node as curr's left child
 					if (curr.left == null) {
 						curr.left = node;
@@ -207,6 +207,98 @@ public class Treap<E extends Comparable <E>> {
 			}
 		}
 	}
+	
+	public boolean delete(E key) {
+		// if the key not in the Treap, return false
+		if (!this.find(key)) {
+			return false;
+		}
+		
+		Node<E> curr = this.root;
+		Node<E> parent = null;
+		int child_flag = 0; // 0 = left child, 1 = right child
+		// find the node whose child is key node
+		while (curr != null) {
+			if (curr.data.compareTo(key) == 0) { // curr.data = key, find it!
+				break;
+			} 
+			else if (curr.data.compareTo(key) > 0) { // key < curr.data, then explore left child
+				parent = curr;
+				child_flag = 0;
+				curr = curr.left;
+			}
+			else { // key > curr.data, then explore right child
+				parent = curr;
+				child_flag = 1;
+				curr = curr.right;
+			}
+		}
+		
+		// now the curr node is the node to be deleted and parent is it's parent node
+		// rotate the curr node down to the leaf level
+		while (curr.left != null || curr.right != null) {
+			Node<E> new_root;
+			// if curr has both children, check which is larger
+			if (curr.left != null && curr.right != null) {
+				// if left child's priority > right child's priority, rotate right
+				if (curr.left.priority > curr.right.priority) {
+					new_root = curr.rotateRight();
+				}// if left child's priority < right child's priority, rotate left
+				else {
+					new_root = curr.rotateLeft();
+				}
+			}
+			// if curr only has left child, rotate right
+			else if (curr.left != null) {
+				new_root = curr.rotateRight();
+			}
+			// if curr only has right child, rotate left
+			else {
+				new_root = curr.rotateLeft();
+			}
+			
+			// reconnect parent to new_root
+			if (parent != null) {
+				if (child_flag == 0) {
+					parent.left = new_root;
+				}
+				else {
+					parent.right = new_root;
+				}
+			}
+			// if parent == null. means curr is root, set root as new_root
+			else {
+				this.root = new_root;
+			}
+			
+			// update parent and child flag
+			parent = new_root;
+			if (parent.left == curr) {
+				child_flag = 0;
+			}
+			else {
+				child_flag = 1;
+			}
+		}
+		
+		// now curr is a leaf node, disconnect it from parent
+		if (parent != null) {
+			if (parent.left == curr) {
+				parent.left = null;
+				curr = null;
+			}
+			else {
+				parent.right = null;
+				curr = null;
+			}
+		}
+		else {
+			this.root = null;
+			curr = null;
+		}
+		return true;
+	}
+	
 	
 	// convert the Treap to String
 	public String toString() {
@@ -304,15 +396,17 @@ public class Treap<E extends Comparable <E>> {
 
 	public static void main(String[] args) {
 		try {
-			Treap<Integer> testTree = new Treap<Integer>();
-			testTree.add(4 ,19); 
-			testTree.add(2 ,31);
-			testTree.add(6 ,70);
-			testTree.add(1 ,84);
-			testTree.add(3 ,12); 
-			testTree.add(5 ,82);
-			testTree.add(7 ,26);
-			testTree.add(8, 83);
+			Treap<Character> testTree = new Treap<Character>();
+			testTree.add('c' ,19); 
+			testTree.add('b' ,31);
+			testTree.add('d' ,70);
+			testTree.add('a' ,84);
+			testTree.add('e' ,12); 
+			testTree.add('o' ,82);
+			testTree.add('m' ,26);
+			testTree.add('h', 83);
+			testTree.delete('a');
+			testTree.delete('h');
 			System.out.print(testTree);
 		}
 		catch (Exception excp) {
